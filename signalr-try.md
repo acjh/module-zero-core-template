@@ -11,6 +11,8 @@
 1. Remove all except `Abp` and `Abp.Web.SignalR.AspNetCore` from `$projects`
 1. Run `aspnetboilerplate\nupkg\pack.ps1`
 
+Doc: https://github.com/acjh/aspnetboilerplate/blob/signalr/doc/WebSite/SignalR-AspNetCore-Integration.md
+
 # Module-zero-core-template
 
 1. Clone https://github.com/acjh/module-zero-core-template.git
