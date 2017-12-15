@@ -19,10 +19,6 @@ using Abp.Owin;
 using AbpCompanyName.AbpProjectName.Owin;
 #endif
 
-#if FEATURE_SIGNALR_ASPNETCORE
-using Abp.Web.SignalR.Hubs;
-#endif
-
 namespace AbpCompanyName.AbpProjectName.Web.Startup
 {
     public class Startup
