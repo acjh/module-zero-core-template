@@ -39,6 +39,10 @@
         connection.on('getNotification', function (notification) {
             abp.event.trigger('abp.notifications.received', notification);
         });
+
+        connection.on('getMessage', function (message) {
+            console.log('received message: ' + message);
+        });
     }
 
     // Connect to the server
