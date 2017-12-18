@@ -2,9 +2,6 @@
 
 1. Clone https://github.com/acjh/aspnetboilerplate.git
 1. Switch branch to: `signalr`
-1. Open `aspnetboilerplate\Abp.sln`
-1. Add remote NuGet package source: https://dotnet.myget.org/F/aspnetcore-dev/api/v3/index.json
-1. Build in Release mode: `Abp.Web.SignalR.AspNetCore`
 1. Open `aspnetboilerplate\common.props`
 1. Change `Version` to `3.3.0`
 1. Open `aspnetboilerplate\nupkg\pack.ps1`
