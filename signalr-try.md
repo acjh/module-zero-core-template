@@ -6,7 +6,7 @@
 1. Add remote NuGet package source: https://dotnet.myget.org/F/aspnetcore-dev/api/v3/index.json
 1. Build in Release mode: `Abp.Web.SignalR.AspNetCore`
 1. Open `aspnetboilerplate\common.props`
-1. Change `Version` to `3.2.6`
+1. Change `Version` to `3.3.0`
 1. Open `aspnetboilerplate\nupkg\pack.ps1`
 1. Remove all except `Abp` and `Abp.Web.SignalR.AspNetCore` from `$projects`
 1. Run `aspnetboilerplate\nupkg\pack.ps1`
