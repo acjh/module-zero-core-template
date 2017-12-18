@@ -1,10 +1,12 @@
 ﻿using Abp.Auditing;
 using Abp.RealTime;
 using Abp.Web.SignalR.Hubs;
-using Microsoft.AspNetCore.SignalR;
 using System.Threading.Tasks;
 
-namespace AbpCompanyName.AbpProjectName.Web.Startup
+#if FEATURE_SIGNALR_ASPNETCORE
+using Microsoft.AspNetCore.SignalR;
+
+namespace AbpCompanyName.AbpProjectName.Web.Host.Startup
 {
     public class MyCommonHub : AbpCommonHub
     {
@@ -21,3 +23,4 @@ namespace AbpCompanyName.AbpProjectName.Web.Startup
         }
     }
 }
+#endif

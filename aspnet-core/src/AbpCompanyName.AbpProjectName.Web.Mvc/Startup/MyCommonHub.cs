@@ -1,8 +1,10 @@
 ﻿using Abp.Auditing;
 using Abp.RealTime;
 using Abp.Web.SignalR.Hubs;
-using Microsoft.AspNetCore.SignalR;
 using System.Threading.Tasks;
+
+#if FEATURE_SIGNALR_ASPNETCORE
+using Microsoft.AspNetCore.SignalR;
 
 namespace AbpCompanyName.AbpProjectName.Web.Startup
 {
@@ -21,3 +23,4 @@ namespace AbpCompanyName.AbpProjectName.Web.Startup
         }
     }
 }
+#endif
