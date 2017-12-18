@@ -21,7 +21,12 @@ Doc: https://github.com/acjh/aspnetboilerplate/blob/signalr/doc/WebSite/SignalR-
 1. Add local NuGet package source: `aspnetboilerplate\nupkg`
 1. Restore NuGet packages
 1. Build in Debug mode: `AbpCompanyName.AbpProjectName.Web.Mvc` (or `*.Web.Host` for Angular)
-1. Run by pressing `F5` key
+1. If using Angular
+   1. Clone https://github.com/acjh/bower-abp-resources.git
+   1. Switch branch to: `signalr`
+   1. Open `module-zero-core-template\angular\package.json`
+   1. Change entry: `"abp-web-resources": "file:..\\..\\bower-abp-resources"`
+   1. Run `npm install`
 1. Login as any user
 1. Open the Console by pressing `Ctrl`+`Shift`+`I`
 1. Copy-paste and run: `abp.signalr.hubs.common.invoke("sendMessage", "Hello World!")`
