@@ -20,7 +20,7 @@ Doc: https://github.com/acjh/aspnetboilerplate/blob/signalr/doc/WebSite/SignalR-
 1. Open `module-zero-core-template\aspnet-core\AbpCompanyName.AbpProjectName.sln`
 1. Add local NuGet package source: `aspnetboilerplate\nupkg`
 1. Restore NuGet packages
-1. Build in Debug mode: `AbpCompanyName.AbpProjectName.Web.Mvc`
+1. Build in Debug mode: `AbpCompanyName.AbpProjectName.Web.Mvc` (or `*.Web.Host` for Angular)
 1. Run by pressing `F5` key
 1. Login as any user
 1. Open the Console by pressing `Ctrl`+`Shift`+`I`
