@@ -1,6 +1,6 @@
 ﻿using Abp.Auditing;
 using Abp.RealTime;
-using Abp.Web.SignalR.Hubs;
+using Abp.AspNetCore.SignalR.Hubs;
 using System.Threading.Tasks;
 
 #if FEATURE_SIGNALR_ASPNETCORE
