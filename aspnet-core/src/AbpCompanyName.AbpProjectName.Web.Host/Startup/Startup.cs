@@ -117,6 +117,7 @@ namespace AbpCompanyName.AbpProjectName.Web.Host.Startup
             app.UseSignalR(routes =>
             {
                 routes.MapHub<MyCommonHub>("/signalr");
+                routes.MapHub<MyChatHub>("/signalr-myChatHub");
             });
 #endif
 
