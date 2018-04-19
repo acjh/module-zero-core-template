@@ -18,7 +18,7 @@ namespace AbpCompanyName.AbpProjectName.Tests.AutoMapper
             {
                 configuration.CreateMap<Plan, PlanDto>()
                     .ForMember(dto => dto.ChildPlan, options => options.MapFrom(
-                        p => new object[] { p.PlanChild1, p.PlanChild2 }.remo.Where(c => c != null)));
+                        p => new object[] { p.PlanChild1, p.PlanChild2 }.Where(c => c != null)));
                 
                 configuration.CreateMap<PlanDetail, ChildPlan>()
                    .ForMember(dto => dto.Type, options => options.MapFrom(p => ChildPlanType.PlanDetail));
