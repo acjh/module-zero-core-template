@@ -17,7 +17,7 @@ namespace AbpCompanyName.AbpProjectName.Web.Startup
                         PageNames.Home,
                         L("HomePage"),
                         url: "",
-                        icon: "home",
+                        icon: "fa fa-home",
                         requiresAuthentication: true
                     )
                 ).AddItem(

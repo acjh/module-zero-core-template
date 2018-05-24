@@ -1,10 +1,20 @@
+<style>
+    .sidebar .fa {
+        font-size: 24px;
+        height: 30px;
+        margin-top: 4px;
+        text-align: center;
+        width: 24px;
+    }
+</style>
 ﻿<div class="menu">
     <ul class="list">
         <ng-template ngFor let-menuItem [ngForOf]="menuItems" let-mainMenuItemIndex="index">
             <li *ngIf="showMenuItem(menuItem)" routerLinkActive="active">
                 <!-- route name -->
                 <a [routerLink]="[menuItem.route]" *ngIf="!menuItem.items.length && menuItem.route.indexOf('http') != 0">
-                    <i *ngIf="menuItem.icon" class="material-icons">{{menuItem.icon}}</i>
+                    <i *ngIf="menuItem.icon && menuItem.icon.startsWith('fa ')" class="{{menuItem.icon}}"></i>
+                    <i *ngIf="menuItem.icon && !menuItem.icon.startsWith('fa ')" class="material-icons">{{menuItem.icon}}</i>
                     <span>{{menuItem.name}}</span>
                 </a>
                 <!-- Static link (starts with 'http') -->

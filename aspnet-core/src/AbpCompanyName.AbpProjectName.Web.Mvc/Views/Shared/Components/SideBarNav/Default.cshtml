@@ -19,6 +19,15 @@
     });
 }
 <div class="menu">
+    <style>
+        .sidebar .fa {
+            font-size: 24px;
+            height: 30px;
+            margin-top: 4px;
+            text-align: center;
+            width: 24px;
+        }
+    </style>
     <ul class="list">
         @foreach (var menuItem in Model.MainMenu.Items)
         {
@@ -28,7 +37,14 @@
                     <a href="@calculateMenuUrl(menuItem.Url)">
                         @if (!string.IsNullOrWhiteSpace(menuItem.Icon))
                         {
-                            <i class="material-icons">@menuItem.Icon</i>
+                            @if (menuItem.Icon.StartsWith("fa "))
+                            {
+                                <i class="@menuItem.Icon"></i>
+                            }
+                            else
+                            {
+                                <i class="material-icons">@menuItem.Icon</i>
+                            }
                         }
                         <span>@menuItem.DisplayName</span>
                     </a>
