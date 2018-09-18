@@ -66,12 +66,12 @@ namespace AbpCompanyName.AbpProjectName.Web.Startup
                                 "AspNetBoilerplateHome",
                                 new FixedLocalizableString("Home"),
                                 url: "https://aspnetboilerplate.com?ref=abptmpl"
-                            )
-                        ).AddItem(
-                            new MenuItemDefinition(
-                                "AspNetBoilerplateTemplates",
-                                new FixedLocalizableString("Templates"),
-                                url: "https://aspnetboilerplate.com/Templates?ref=abptmpl"
+                            ).AddItem(
+                                new MenuItemDefinition(
+                                    "AspNetBoilerplateTemplates",
+                                    new FixedLocalizableString("Templates"),
+                                    url: "https://aspnetboilerplate.com/Templates?ref=abptmpl"
+                                )
                             )
                         ).AddItem(
                             new MenuItemDefinition(
