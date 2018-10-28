@@ -10,8 +10,27 @@ using AbpCompanyName.AbpProjectName.Localization;
 using AbpCompanyName.AbpProjectName.MultiTenancy;
 using AbpCompanyName.AbpProjectName.Timing;
 
+using Abp.Auditing;
+using Abp.Configuration.Startup;
+using Abp.Dependency;
+
+using System;
+using System.Collections.Generic;
+using System.Reflection;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
+using System.Threading.Tasks;
+
 namespace AbpCompanyName.AbpProjectName
 {
+    public class AuditingStore : IAuditingStore, ITransientDependency
+    {
+        public Task SaveAsync(AuditInfo auditInfo)
+        {
+            return Task.CompletedTask;
+        }
+    }
+
     [DependsOn(typeof(AbpZeroCoreModule))]
     public class AbpProjectNameCoreModule : AbpModule
     {
@@ -33,6 +52,10 @@ namespace AbpCompanyName.AbpProjectName
             AppRoleConfig.Configure(Configuration.Modules.Zero().RoleManagement);
 
             Configuration.Settings.Providers.Add<AppSettingProvider>();
+
+            Configuration.ReplaceService<IAuditSerializer, JsonNetAuditSerializer>();
+
+            Configuration.ReplaceService<IAuditingStore, AuditingStore>();
         }
 
         public override void Initialize()
@@ -44,5 +67,62 @@ namespace AbpCompanyName.AbpProjectName
         {
             IocManager.Resolve<AppTimes>().StartupTime = Clock.Now;
         }
+    }
+
+    public class JsonNetAuditSerializer : IAuditSerializer, ITransientDependency
+    {
+        private readonly IAuditingConfiguration _configuration;
+
+        public JsonNetAuditSerializer(IAuditingConfiguration configuration)
+        {
+            _configuration = configuration;
+        }
+
+        public string Serialize(object obj)
+        {
+            var options = new JsonSerializerSettings
+            {
+                ContractResolver = new AuditingContractResolver(_configuration.IgnoredTypes)
+            };
+
+            return JsonConvert.SerializeObject(obj, options);
+        }
+    }
+
+    public class MaskableAuditingContractResolver : AuditingContractResolver
+    {
+        public MaskableAuditingContractResolver(List<Type> ignoredTypes)
+            : base(ignoredTypes)
+        {
+        }
+
+        protected override JsonProperty CreateProperty(MemberInfo member, MemberSerialization memberSerialization)
+        {
+            var property = base.CreateProperty(member, memberSerialization);
+
+            if (member.IsDefined(typeof(MaskedAuditedAttribute)))
+            {
+                property.ValueProvider = new MaskedValueProvider();
+            }
+
+            return property;
+        }
+    }
+
+    public class MaskedValueProvider : IValueProvider
+    {
+        public object GetValue(object target)
+        {
+            return "***";
+        }
+
+        public void SetValue(object target, object value)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+    public class MaskedAuditedAttribute : AuditedAttribute
+    {
     }
 }

@@ -73,8 +73,10 @@ namespace AbpCompanyName.AbpProjectName.Web.Controllers
 
         #region Login / Logout
 
-        public ActionResult Login(string userNameOrEmailAddress = "", string returnUrl = "", string successMessage = "")
+        public ActionResult Login(LoginViewModel loginViewModel)
         {
+            var returnUrl = "";
+
             if (string.IsNullOrWhiteSpace(returnUrl))
             {
                 returnUrl = GetAppHomeUrl();
