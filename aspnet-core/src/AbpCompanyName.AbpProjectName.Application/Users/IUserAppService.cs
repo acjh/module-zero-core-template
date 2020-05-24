@@ -10,6 +10,9 @@ namespace AbpCompanyName.AbpProjectName.Users
     {
         Task<ListResultDto<RoleDto>> GetRoles();
 
+        void TestUnitOfWork();
+        void TestUnitOfWork2();
+
         Task ChangeLanguage(ChangeUserLanguageDto input);
 
         Task<bool> ChangePassword(ChangePasswordDto input);

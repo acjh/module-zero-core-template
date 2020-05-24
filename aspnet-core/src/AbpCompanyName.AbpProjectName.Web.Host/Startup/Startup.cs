@@ -108,6 +108,9 @@ namespace AbpCompanyName.AbpProjectName.Web.Host.Startup
                 });
             });
 
+            services.AddRazorPages();
+            services.AddServerSideBlazor();
+
             // Configure Abp and Dependency Injection
             return services.AddAbp<AbpProjectNameWebHostModule>(
                 // Configure Log4Net logging
@@ -131,12 +134,25 @@ namespace AbpCompanyName.AbpProjectName.Web.Host.Startup
 
             app.UseAbpRequestLocalization();
 
+            app.Use(async (context, next) =>
+            {
+                // Do work that doesn't write to the Response.
+                await next.Invoke();
+                // Do logging or other work that doesn't write to the Response.
+            });
+
           
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapHub<AbpCommonHub>("/signalr");
+                // endpoints.MapHub<AbpCommonHub>("/signalr");
+                endpoints.MapRazorPages();
+                endpoints.MapBlazorHub();
+
                 endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapControllerRoute("defaultWithArea", "{area}/{controller=Home}/{action=Index}/{id?}");
+
+                
+                // endpoints.MapFallbackToPage("/_Host");
             });
 
             // Enable middleware to serve generated Swagger as a JSON endpoint

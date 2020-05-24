@@ -1,0 +1,27 @@
+﻿@page
+@using System.Net.Http
+@using Microsoft.AspNetCore.Authorization
+@using Microsoft.AspNetCore.Components.Authorization
+@using Microsoft.AspNetCore.Components.Forms
+@using Microsoft.AspNetCore.Components.Routing
+@using Microsoft.AspNetCore.Components.Web
+@using Microsoft.JSInterop
+@using CounterTest;
+@{
+    // ViewData["Title"] = "Home page";
+}
+
+    <body>
+        @(await Html.RenderComponentAsync<Counter>(RenderMode.Server))
+        <script src="~/_framework/blazor.server.js" autostart="false"></script>
+        <script>
+            (function start() {
+                Blazor.start({
+                    logLevel: 1, // LogLevel.Debug
+                    configureSignalR: builder => builder.configureLogging("debug") // LogLevel.Debug
+                });
+            })()
+        </script>
+
+        <!--<component type="typeof(Counter)" render-mode="ServerPrerendered" />-->
+    </body>

@@ -7,6 +7,7 @@ using Abp.Application.Services.Dto;
 using Abp.Authorization;
 using Abp.Domain.Entities;
 using Abp.Domain.Repositories;
+using Abp.Domain.Uow;
 using Abp.Extensions;
 using Abp.IdentityFramework;
 using Abp.Linq.Extensions;
@@ -24,7 +25,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace AbpCompanyName.AbpProjectName.Users
 {
-    [AbpAuthorize(PermissionNames.Pages_Users)]
+    // [AbpAuthorize(PermissionNames.Pages_Users)]
     public class UserAppService : AsyncCrudAppService<User, UserDto, long, PagedUserResultRequestDto, CreateUserDto, UserDto>, IUserAppService
     {
         private readonly UserManager _userManager;
@@ -51,6 +52,20 @@ namespace AbpCompanyName.AbpProjectName.Users
             _abpSession = abpSession;
             _logInManager = logInManager;
         }
+
+        [UnitOfWork(IsDisabled = true)]
+        public virtual void TestUnitOfWork()
+        {
+            var current = CurrentUnitOfWork;
+        }
+
+        [UnitOfWork]
+        public virtual void TestUnitOfWork2()
+        {
+            var current = CurrentUnitOfWork;
+        }
+
+
 
         public override async Task<UserDto> CreateAsync(CreateUserDto input)
         {

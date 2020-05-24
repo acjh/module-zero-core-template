@@ -1,0 +1,43 @@
+﻿@page "/counter"
+@namespace CounterTest
+@using Microsoft.AspNetCore.Components
+@using Microsoft.AspNetCore.Components.Web;
+@using System.Net.Http
+@using Microsoft.AspNetCore.Components.Forms
+@using Microsoft.AspNetCore.Components.Routing
+@using Microsoft.JSInterop
+
+<h1>Counter</h1>
+
+<p>Current count: @_currentCount</p>
+
+<button class="btn btn-primary" @onclick="@IncrementCount">Click me</button>
+
+@code {
+    private int _currentCount = 0;
+
+    @using Abp.Domain.Uow
+    @inject IUnitOfWorkManager UnitOfWorkManager
+
+    @using AbpCompanyName.AbpProjectName.Users
+    @inject UserAppService UserAppService
+
+    private async Task IncrementCount()
+    {
+        UserAppService.TestUnitOfWork();
+        UserAppService.TestUnitOfWork2();
+
+        var current = UnitOfWorkManager.Current;
+        using (var unitOfWork = UnitOfWorkManager.Begin())
+        {
+            var now = UnitOfWorkManager.Current;
+
+            await unitOfWork.CompleteAsync();
+        }
+
+        _currentCount++;
+        await Task.CompletedTask;
+
+        StateHasChanged();
+    }
+}
